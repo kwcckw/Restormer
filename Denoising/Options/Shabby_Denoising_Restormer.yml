@@ -21,10 +21,10 @@ datasets:
     # data loader
     use_shuffle: true
     num_worker_per_gpu: 4
-    batch_size_per_gpu: 2
+    batch_size_per_gpu: 4
 
     ### -------------Progressive training--------------------------
-    mini_batch_sizes: [2]             # Batch size per gpu   
+    mini_batch_sizes: [4]             # Batch size per gpu   
     iters: [8000]
     gt_size: 400   # Max patch size for progressive training
     gt_sizes: [400]  # Patch sizes for progressive training.
@@ -53,7 +53,7 @@ network_g:
   type: Restormer
   inp_channels: 3
   out_channels: 3
-  dim: 48
+  dim: 24
   num_blocks: [4,6,6,8]
   num_refinement_blocks: 4
   heads: [1,2,4,8]
@@ -103,12 +103,12 @@ train:
 
 # validation settings
 val:
-  window_size: 8
+  window_size: 2
   val_freq: !!float 4e3
   save_img: false
   rgb2bgr: true
   use_image: false
-  max_minibatch: 8
+  max_minibatch: 2
 
   metrics:
     psnr: # metric name, can be arbitrary
